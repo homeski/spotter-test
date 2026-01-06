@@ -1,0 +1,6 @@
+- hosts: localhost
+  vars_files:
+    - vars.yml
+  tasks:
+    - ansible.builtin.debug:
+        msg: "{{ foo }}"
