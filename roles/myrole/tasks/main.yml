@@ -1,0 +1,3 @@
+---
+- ansible.builtin.debug:
+    msg: "{{ my_auth_apikey }}"

@@ -1,6 +1,4 @@
 - hosts: localhost
-  vars_files:
-    - vars.yml
   tasks:
-    - ansible.builtin.debug:
-        msg: "{{ foo }}"
+    - ansible.builtin.import_role:
+        name: myrole
