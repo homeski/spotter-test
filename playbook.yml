@@ -1,4 +1,44 @@
-- hosts: localhost
+- name: Test custom lint rule
+  hosts: localhost
+  vars:
+    play_password: "foo"
+    passwords:
+      - "sdf"
+    play_apikey: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      62336237306235353835636163343738326335393436373639373264633039623438323862623466
+      3736333963613635313734373262653536316262373464650a636166356135333939313039663633
+      32653936616430663462636331633464366565643965613236616332376232353962316464353938
+      3833613332626331370a386638663865306536393365313735326364663366633164346335633939
+      6366
+  roles:
+    - role: myrole
+      vars:
+        role_vars_password: sdfasdf
+        role_vars_apikey: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62336237306235353835636163343738326335393436373639373264633039623438323862623466
+          3736333963613635313734373262653536316262373464650a636166356135333939313039663633
+          32653936616430663462636331633464366565643965613236616332376232353962316464353938
+          3833613332626331370a386638663865306536393365313735326364663366633164346335633939
+          6366
   tasks:
-    - ansible.builtin.import_role:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: "{{ play_password }}"
+
+    - name: Import role
+      ansible.builtin.import_role:
         name: myrole
+
+    - name: Test
+      vars:
+        task_password: dfg
+        task_apikey: foo
+      ansible.builtin.debug:
+        msg: "{{ task_apikey }}"
+
+    - name: Set fact
+      ansible.builtin.set_fact:
+        fact_password: "blah"
+        fact_apikey: "df"

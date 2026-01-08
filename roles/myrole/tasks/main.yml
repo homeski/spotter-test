@@ -1,11 +1,4 @@
 ---
-- ansible.builtin.debug:
-    msg: "{{ my_auth_apikey }}"
-
-- name: Download file with basic authentication
-  ansible.builtin.get_url:
-    url: my.secure.site
-    dest: /tmp/secure_data.txt
-    url_username: myuser
-    url_password: "{{ my_auth_apikey }}"
-    force_basic_auth: no
+- name: Debug
+  ansible.builtin.debug:
+    msg: "blah"
