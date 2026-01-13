@@ -44,7 +44,6 @@ class SecretsCheckingRule(AnsibleLintRule):
                     tag="secrets[no-vault]",
                     message=f" ({ident})",
                     filename=file,
-                    data=ident,
                 )
 
         return None
